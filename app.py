@@ -145,10 +145,9 @@ def make_prediction(clicks, longitude, latitude, housing_median_age, total_rooms
 
         
         # standardization
-        # std_inputs = std_scaler.transform(inputs)
-        knn_inputs = knn_fig.transform(inputs)
+        std_inputs = std_scaler.transform(inputs)
 
-        y = knn_fig.predict(knn_inputs)
+        y = knn_fig.predict(std_inputs)
         formatted_y = "${:,.2f}".format(y[0])
         return formatted_y
 
