@@ -22,6 +22,8 @@ with open('analysis/model_components/std_scaler.pkl', 'rb') as f:
     std_scaler=pickle.load(f)
 with open('analysis/model_components/lin_reg.pkl', 'rb') as f:
     lin_reg=pickle.load(f)
+with open('analysis/model_components/knn.pkl', 'rb') as f:
+    knn_fig=pickle.load(f)
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -141,10 +143,12 @@ def make_prediction(clicks, longitude, latitude, housing_median_age, total_rooms
         # fake = np.array([-122, 37, 40, 2000, 3000, 500, 3, 3, 6, 4, 0, 0, 1, 0]).reshape(1, -1)
         # std_fake = std_scaler.transform(fake)
 
+        
         # standardization
-        std_inputs = std_scaler.transform(inputs)
+        # std_inputs = std_scaler.transform(inputs)
+        knn_inputs = knn_fig.transform(inputs)
 
-        y = lin_reg.predict(std_inputs)
+        y = knn_fig.predict(knn_inputs)
         formatted_y = "${:,.2f}".format(y[0])
         return formatted_y
 
